@@ -1,4 +1,4 @@
-package tradecalculator;
+package movingaverage;
 
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
-package tradecalculator.investigation;
+package movingaverage.investigation;
 
-import tradecalculator.MovingAverageCalculator;
+import movingaverage.MovingAverageCalculator;
 
 import java.util.Set;
 

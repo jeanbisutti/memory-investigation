@@ -1,4 +1,4 @@
-package tradecalculator;
+package movingaverage;
 
 public class Trade {
 

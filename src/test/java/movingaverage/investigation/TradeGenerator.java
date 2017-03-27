@@ -1,7 +1,7 @@
-package tradecalculator.investigation;
+package movingaverage.investigation;
 
-import tradecalculator.Money;
-import tradecalculator.Trade;
+import movingaverage.Money;
+import movingaverage.Trade;
 
 import java.util.stream.Stream;
 

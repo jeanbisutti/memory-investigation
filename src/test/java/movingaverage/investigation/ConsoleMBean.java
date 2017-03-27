@@ -1,4 +1,4 @@
-package tradecalculator.investigation;
+package movingaverage.investigation;
 
 public interface ConsoleMBean {
 
