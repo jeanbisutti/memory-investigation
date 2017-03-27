@@ -6,13 +6,13 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class TradeCalculator {
+public class MovingAverageCalculator {
 
     private static final Map<String, CopyOnWriteArrayList<Integer>> TRADES_BY_INSTRUMENT = new ConcurrentHashMap<>();
 
     private final int inputWindowSize;
 
-    public TradeCalculator(int windowSize) {
+    public MovingAverageCalculator(int windowSize) {
         this.inputWindowSize = windowSize;
     }
 

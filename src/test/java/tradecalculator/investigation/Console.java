@@ -1,6 +1,6 @@
 package tradecalculator.investigation;
 
-import tradecalculator.TradeCalculator;
+import tradecalculator.MovingAverageCalculator;
 
 import java.util.Set;
 
@@ -9,11 +9,11 @@ import static java.util.stream.Collectors.joining;
 public class Console implements ConsoleMBean {
 
     private final TradeGenerator tradeGenerator;
-    private final TradeCalculator tradeCalculator;
+    private final MovingAverageCalculator movingAverageCalculator;
 
-    public Console(TradeGenerator tradeGenerator, TradeCalculator tradeCalculator) {
+    public Console(TradeGenerator tradeGenerator, MovingAverageCalculator movingAverageCalculator) {
         this.tradeGenerator = tradeGenerator;
-        this.tradeCalculator = tradeCalculator;
+        this.movingAverageCalculator = movingAverageCalculator;
     }
 
     @Override
@@ -34,12 +34,12 @@ public class Console implements ConsoleMBean {
 
     @Override
     public String searchReceivedInstuments() {
-        Set<String> receivedInstuments = tradeCalculator.searchReceivedInstuments();
+        Set<String> receivedInstuments = movingAverageCalculator.searchReceivedInstuments();
         return receivedInstuments.stream().collect(joining(", "));
     }
 
     @Override
     public int computeRollingAverageAmount(String instrument) {
-        return tradeCalculator.computeRollingAverageAmountFor(instrument);
+        return movingAverageCalculator.computeRollingAverageAmountFor(instrument);
     }
 }

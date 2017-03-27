@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TradeCalculatorTest {
+public class MovingAverageCalculatorTest {
 
     public static final String USD = "USD";
 
@@ -20,13 +20,13 @@ public class TradeCalculatorTest {
     computed_moving_average_should_be_0_with_0_window_size() {
 
         // Given
-        TradeCalculator tradeCalculator = new TradeCalculator(0);
+        MovingAverageCalculator movingAverageCalculator = new MovingAverageCalculator(0);
 
-        tradeCalculator.consume(anAppleTrade(12185));
-        tradeCalculator.consume(anAppleTrade(12190));
+        movingAverageCalculator.consume(anAppleTrade(12185));
+        movingAverageCalculator.consume(anAppleTrade(12190));
 
         // When
-        int rollingAverage = tradeCalculator.computeRollingAverageAmountFor(APPLE_INSTRUMENT);
+        int rollingAverage = movingAverageCalculator.computeRollingAverageAmountFor(APPLE_INSTRUMENT);
 
         //Then
         assertThat(rollingAverage).isEqualTo(0);
@@ -39,14 +39,14 @@ public class TradeCalculatorTest {
 
         //Given
         int windowSize = 3;
-        TradeCalculator tradeCalculator = new TradeCalculator(windowSize);
+        MovingAverageCalculator movingAverageCalculator = new MovingAverageCalculator(windowSize);
 
-        tradeCalculator.consume(anAppleTrade(12185));
-        tradeCalculator.consume(anAppleTrade(12190));
-        tradeCalculator.consume(anAppleTrade(12195));
+        movingAverageCalculator.consume(anAppleTrade(12185));
+        movingAverageCalculator.consume(anAppleTrade(12190));
+        movingAverageCalculator.consume(anAppleTrade(12195));
 
         //When
-        int rollingAverage = tradeCalculator.computeRollingAverageAmountFor(APPLE_INSTRUMENT);
+        int rollingAverage = movingAverageCalculator.computeRollingAverageAmountFor(APPLE_INSTRUMENT);
 
         //Then
         assertThat(rollingAverage).isEqualTo(12190);
@@ -63,13 +63,13 @@ public class TradeCalculatorTest {
 
         //Given
         int windowSize = 3;
-        TradeCalculator tradeCalculator = new TradeCalculator(windowSize);
+        MovingAverageCalculator movingAverageCalculator = new MovingAverageCalculator(windowSize);
 
-        tradeCalculator.consume(anAlphabetTrade(12185));
-        tradeCalculator.consume(anAlphabetTrade(12195));
+        movingAverageCalculator.consume(anAlphabetTrade(12185));
+        movingAverageCalculator.consume(anAlphabetTrade(12195));
 
         //When
-        int rollingAverage = tradeCalculator.computeRollingAverageAmountFor(ALPHABET_INSTRUMENT);
+        int rollingAverage = movingAverageCalculator.computeRollingAverageAmountFor(ALPHABET_INSTRUMENT);
 
         //Then
         assertThat(rollingAverage).isEqualTo(12190);
@@ -86,15 +86,15 @@ public class TradeCalculatorTest {
 
         //Given
         int windowSize = 3;
-        TradeCalculator tradeCalculator = new TradeCalculator(windowSize);
+        MovingAverageCalculator movingAverageCalculator = new MovingAverageCalculator(windowSize);
 
-        tradeCalculator.consume(aTeslaTrade(11101));
-        tradeCalculator.consume(aTeslaTrade(12185));
-        tradeCalculator.consume(aTeslaTrade(12190));
-        tradeCalculator.consume(aTeslaTrade(12195));
+        movingAverageCalculator.consume(aTeslaTrade(11101));
+        movingAverageCalculator.consume(aTeslaTrade(12185));
+        movingAverageCalculator.consume(aTeslaTrade(12190));
+        movingAverageCalculator.consume(aTeslaTrade(12195));
 
         //When
-        int rollingAverage = tradeCalculator.computeRollingAverageAmountFor(TESLA_INSTRUMENT);
+        int rollingAverage = movingAverageCalculator.computeRollingAverageAmountFor(TESLA_INSTRUMENT);
 
         //Then
         assertThat(rollingAverage).isEqualTo(12190);
