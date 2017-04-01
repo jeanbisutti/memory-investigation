@@ -2,12 +2,14 @@ package movingaverage;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MovingAverageCalculator {
 
-    private static final Map<String, CopyOnWriteArrayList<Integer>> TRADES_BY_INSTRUMENT = new ConcurrentHashMap<>();
+    private static final Map<String, BlockingQueue<Integer>> TRADES_BY_INSTRUMENT = new ConcurrentHashMap<>();
 
     private final int inputWindowSize;
 
@@ -23,14 +25,14 @@ public class MovingAverageCalculator {
 
         String instrument = trade.getInstrument();
 
-        CopyOnWriteArrayList<Integer> tradeAmounts = tradeAmountsFor(instrument);
+        BlockingQueue<Integer> tradeAmounts = tradeAmountsFor(instrument);
 
         Integer tradeAmount = trade.getMoney().getAmountInCents();
 
         int currentNumberOfTrades = tradeAmounts.size();
 
         if(isWindowsSizeReached(currentNumberOfTrades)) {
-            tradeAmounts.remove(0);
+            tradeAmounts.poll();
         }
 
         tradeAmounts.add(tradeAmount);
@@ -43,10 +45,10 @@ public class MovingAverageCalculator {
             return 0;
         }
 
-        CopyOnWriteArrayList<Integer> trades = TRADES_BY_INSTRUMENT.get(instrument);
-        int numberOfTrades = trades.size();
+        BlockingQueue<Integer> tradeAmounts = TRADES_BY_INSTRUMENT.get(instrument);
+        int numberOfTrades = tradeAmounts .size();
 
-        return computeTotalAmount(trades) / windowSizeFor(numberOfTrades);
+        return computeTotalAmount(tradeAmounts) / windowSizeFor(numberOfTrades);
 
     }
 
@@ -54,9 +56,9 @@ public class MovingAverageCalculator {
         return TRADES_BY_INSTRUMENT.keySet();
     }
 
-    private CopyOnWriteArrayList<Integer> tradeAmountsFor(String instrument) {
+    private BlockingQueue<Integer> tradeAmountsFor(String instrument) {
         return TRADES_BY_INSTRUMENT
-                .computeIfAbsent(instrument, key -> new CopyOnWriteArrayList<>());
+                .computeIfAbsent(instrument, key -> new ArrayBlockingQueue<>(inputWindowSize));
     }
 
     private boolean isWindowsSizeReached(int currentNumberOfTrades) {
@@ -67,16 +69,15 @@ public class MovingAverageCalculator {
         return TRADES_BY_INSTRUMENT.containsKey(instrument);
     }
 
-    private int computeTotalAmount(CopyOnWriteArrayList<Integer> amounts) {
+    private int computeTotalAmount(BlockingQueue<Integer> amounts) {
 
         int totalAmount = 0;
 
         int numberOfTrades = amounts.size();
         int windowSize = windowSizeFor(numberOfTrades);
 
-        for (int i = numberOfTrades - windowSize; i < numberOfTrades; i++) {
-            Integer amount = amounts.get(i);
-            totalAmount += amount;
+        for(Integer amount : amounts) {
+            totalAmount +=  amount;
         }
 
         return totalAmount;
