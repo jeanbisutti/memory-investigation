@@ -24,10 +24,17 @@ public class MovingAverageCalculator {
 
         String instrument = trade.getInstrument();
 
-        CopyOnWriteArrayList<Integer> trades = tradesFor(instrument);
+        CopyOnWriteArrayList<Integer> tradeAmounts = tradesFor(instrument);
 
         Integer tradeAmount = trade.getMoney().getAmountInCents();
-        trades.add(tradeAmount);
+
+        int currentNumberOfTrades = tradeAmounts.size();
+
+        if(isWindowsSizeReached(currentNumberOfTrades)) {
+            tradeAmounts.remove(0);
+        }
+
+        tradeAmounts.add(tradeAmount);
 
     }
 
@@ -53,8 +60,8 @@ public class MovingAverageCalculator {
                 .computeIfAbsent(instrument, key -> new CopyOnWriteArrayList<>());
     }
 
-    private boolean isWindowsSizeReached(List<Integer> tradeAmounts) {
-        return tradeAmounts.size() == inputWindowSize;
+    private boolean isWindowsSizeReached(int currentNumberOfTrades) {
+        return currentNumberOfTrades == inputWindowSize;
     }
 
     private boolean receivedTradeFor(String instrument) {
