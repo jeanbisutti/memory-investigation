@@ -1,6 +1,5 @@
 package movingaverage;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,10 +23,11 @@ public class MovingAverageCalculator {
 
         String instrument = trade.getInstrument();
 
-        CopyOnWriteArrayList<Integer> trades = tradesFor(instrument);
+        CopyOnWriteArrayList<Integer> tradeAmounts = tradeAmountsFor(instrument);
 
         Integer tradeAmount = trade.getMoney().getAmountInCents();
-        trades.add(tradeAmount);
+
+        tradeAmounts.add(tradeAmount);
 
     }
 
@@ -48,13 +48,9 @@ public class MovingAverageCalculator {
         return TRADES_BY_INSTRUMENT.keySet();
     }
 
-    private CopyOnWriteArrayList<Integer> tradesFor(String instrument) {
+    private CopyOnWriteArrayList<Integer> tradeAmountsFor(String instrument) {
         return TRADES_BY_INSTRUMENT
                 .computeIfAbsent(instrument, key -> new CopyOnWriteArrayList<>());
-    }
-
-    private boolean isWindowsSizeReached(List<Integer> tradeAmounts) {
-        return tradeAmounts.size() == inputWindowSize;
     }
 
     private boolean receivedTradeFor(String instrument) {
