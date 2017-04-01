@@ -74,8 +74,7 @@ public class MovingAverageCalculator {
         int numberOfTrades = amounts.size();
         int windowSize = windowSizeFor(numberOfTrades);
 
-        for (int i = numberOfTrades - windowSize; i < numberOfTrades; i++) {
-            Integer amount = amounts.get(i);
+        for(Integer amount : amounts) {
             totalAmount += amount;
         }
 
