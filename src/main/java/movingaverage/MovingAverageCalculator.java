@@ -71,16 +71,11 @@ public class MovingAverageCalculator {
 
     private int computeTotalAmount(BlockingQueue<Integer> amounts) {
 
-        int totalAmount = 0;
+        return   amounts
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
 
-        int numberOfTrades = amounts.size();
-        int windowSize = windowSizeFor(numberOfTrades);
-
-        for(Integer amount : amounts) {
-            totalAmount +=  amount;
-        }
-
-        return totalAmount;
     }
 
     private int windowSizeFor(int numberOfTrades) {
