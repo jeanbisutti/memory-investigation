@@ -10,7 +10,7 @@ Tools could help you to understand the observed memory behaviors:
 - JVM aguments: -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:gc.log
 - GCViewer (https://github.com/chewiebug/GCViewer)
 - Memory Analyzer Tool (MAT)
-- Java Mission Control (add -XX:+UnlockCommercialFeatures and -XX:+FlightRecorder JVM aguments)
+- Java Mission Control (add -XX:+UnlockCommercialFeatures and -XX:+FlightRecorder JVM arguments)
 - https://github.com/jmaloney10/allocation-instrumenter
 - ...
 
