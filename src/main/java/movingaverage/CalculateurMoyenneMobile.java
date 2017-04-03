@@ -1,17 +1,19 @@
 package movingaverage;
 
+import com.sun.corba.se.spi.transport.TransportDefault;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class MovingAverageCalculator {
+public class CalculateurMoyenneMobile {
 
-    private static final Map<String, CopyOnWriteArrayList<Integer>> TRADES_BY_INSTRUMENT = new ConcurrentHashMap<>();
+    private static final Map<String, CopyOnWriteArrayList<Trade>> TRADES_BY_INSTRUMENT = new ConcurrentHashMap<>();
 
     private final int inputWindowSize;
 
-    public MovingAverageCalculator(int windowSize) {
+    public CalculateurMoyenneMobile(int windowSize) {
         this.inputWindowSize = windowSize;
     }
 
@@ -23,11 +25,9 @@ public class MovingAverageCalculator {
 
         String instrument = trade.getInstrument();
 
-        CopyOnWriteArrayList<Integer> tradeAmounts = tradeAmountsFor(instrument);
+        CopyOnWriteArrayList<Trade> trades = tradesFor(instrument);
 
-        Integer tradeAmount = trade.getMoney().getAmountInCents();
-
-        tradeAmounts.add(tradeAmount);
+        trades.add(trade);
 
     }
 
@@ -37,7 +37,7 @@ public class MovingAverageCalculator {
             return 0;
         }
 
-        CopyOnWriteArrayList<Integer> trades = TRADES_BY_INSTRUMENT.get(instrument);
+        CopyOnWriteArrayList<Trade> trades = TRADES_BY_INSTRUMENT.get(instrument);
         int numberOfTrades = trades.size();
 
         return computeTotalAmount(trades) / windowSizeFor(numberOfTrades);
@@ -48,7 +48,7 @@ public class MovingAverageCalculator {
         return TRADES_BY_INSTRUMENT.keySet();
     }
 
-    private CopyOnWriteArrayList<Integer> tradeAmountsFor(String instrument) {
+    private CopyOnWriteArrayList<Trade> tradesFor(String instrument) {
         return TRADES_BY_INSTRUMENT
                 .computeIfAbsent(instrument, key -> new CopyOnWriteArrayList<>());
     }
@@ -57,15 +57,15 @@ public class MovingAverageCalculator {
         return TRADES_BY_INSTRUMENT.containsKey(instrument);
     }
 
-    private int computeTotalAmount(CopyOnWriteArrayList<Integer> amounts) {
+    private int computeTotalAmount(CopyOnWriteArrayList<Trade> trades) {
 
         int totalAmount = 0;
 
-        int numberOfTrades = amounts.size();
+        int numberOfTrades = trades.size();
         int windowSize = windowSizeFor(numberOfTrades);
 
         for (int i = numberOfTrades - windowSize; i < numberOfTrades; i++) {
-            Integer amount = amounts.get(i);
+            Integer amount = trades.get(i).getMoney().getAmountInCents();
             totalAmount += amount;
         }
 

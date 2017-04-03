@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MovingAverageCalculatorTest {
+public class CalculateurMoyenneMobileTest {
 
     public static final String USD = "USD";
 
@@ -20,13 +20,13 @@ public class MovingAverageCalculatorTest {
     computed_moving_average_should_be_0_with_0_window_size() {
 
         // Given
-        MovingAverageCalculator movingAverageCalculator = new MovingAverageCalculator(0);
+        CalculateurMoyenneMobile calculateurMoyenneMobile = new CalculateurMoyenneMobile(0);
 
-        movingAverageCalculator.consume(anAppleTrade(12185));
-        movingAverageCalculator.consume(anAppleTrade(12190));
+        calculateurMoyenneMobile.consume(anAppleTrade(12185));
+        calculateurMoyenneMobile.consume(anAppleTrade(12190));
 
         // When
-        int rollingAverage = movingAverageCalculator.computeRollingAverageAmountFor(APPLE_INSTRUMENT);
+        int rollingAverage = calculateurMoyenneMobile.computeRollingAverageAmountFor(APPLE_INSTRUMENT);
 
         //Then
         assertThat(rollingAverage).isEqualTo(0);
@@ -39,14 +39,14 @@ public class MovingAverageCalculatorTest {
 
         //Given
         int windowSize = 3;
-        MovingAverageCalculator movingAverageCalculator = new MovingAverageCalculator(windowSize);
+        CalculateurMoyenneMobile calculateurMoyenneMobile = new CalculateurMoyenneMobile(windowSize);
 
-        movingAverageCalculator.consume(anAppleTrade(12185));
-        movingAverageCalculator.consume(anAppleTrade(12190));
-        movingAverageCalculator.consume(anAppleTrade(12195));
+        calculateurMoyenneMobile.consume(anAppleTrade(12185));
+        calculateurMoyenneMobile.consume(anAppleTrade(12190));
+        calculateurMoyenneMobile.consume(anAppleTrade(12195));
 
         //When
-        int rollingAverage = movingAverageCalculator.computeRollingAverageAmountFor(APPLE_INSTRUMENT);
+        int rollingAverage = calculateurMoyenneMobile.computeRollingAverageAmountFor(APPLE_INSTRUMENT);
 
         //Then
         assertThat(rollingAverage).isEqualTo(12190);
@@ -63,13 +63,13 @@ public class MovingAverageCalculatorTest {
 
         //Given
         int windowSize = 3;
-        MovingAverageCalculator movingAverageCalculator = new MovingAverageCalculator(windowSize);
+        CalculateurMoyenneMobile calculateurMoyenneMobile = new CalculateurMoyenneMobile(windowSize);
 
-        movingAverageCalculator.consume(anAlphabetTrade(12185));
-        movingAverageCalculator.consume(anAlphabetTrade(12195));
+        calculateurMoyenneMobile.consume(anAlphabetTrade(12185));
+        calculateurMoyenneMobile.consume(anAlphabetTrade(12195));
 
         //When
-        int rollingAverage = movingAverageCalculator.computeRollingAverageAmountFor(ALPHABET_INSTRUMENT);
+        int rollingAverage = calculateurMoyenneMobile.computeRollingAverageAmountFor(ALPHABET_INSTRUMENT);
 
         //Then
         assertThat(rollingAverage).isEqualTo(12190);
@@ -86,15 +86,15 @@ public class MovingAverageCalculatorTest {
 
         //Given
         int windowSize = 3;
-        MovingAverageCalculator movingAverageCalculator = new MovingAverageCalculator(windowSize);
+        CalculateurMoyenneMobile calculateurMoyenneMobile = new CalculateurMoyenneMobile(windowSize);
 
-        movingAverageCalculator.consume(aTeslaTrade(11101));
-        movingAverageCalculator.consume(aTeslaTrade(12185));
-        movingAverageCalculator.consume(aTeslaTrade(12190));
-        movingAverageCalculator.consume(aTeslaTrade(12195));
+        calculateurMoyenneMobile.consume(aTeslaTrade(11101));
+        calculateurMoyenneMobile.consume(aTeslaTrade(12185));
+        calculateurMoyenneMobile.consume(aTeslaTrade(12190));
+        calculateurMoyenneMobile.consume(aTeslaTrade(12195));
 
         //When
-        int rollingAverage = movingAverageCalculator.computeRollingAverageAmountFor(TESLA_INSTRUMENT);
+        int rollingAverage = calculateurMoyenneMobile.computeRollingAverageAmountFor(TESLA_INSTRUMENT);
 
         //Then
         assertThat(rollingAverage).isEqualTo(12190);
