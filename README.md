@@ -9,7 +9,7 @@ Tools could help you to understand the observed memory behaviors:
 - JDK commands: jps, jstat, jmap, jcmd
 - JVM aguments: -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:gc.log
 - GCViewer (https://github.com/chewiebug/GCViewer)
-- Memory Analyzer Tool (MAT)
+- Memory Analyzer Tool (http://www.eclipse.org/mat/)
 - Java Mission Control (add -XX:+UnlockCommercialFeatures and -XX:+FlightRecorder JVM arguments)
 - https://github.com/jmaloney10/allocation-instrumenter
 - ...
