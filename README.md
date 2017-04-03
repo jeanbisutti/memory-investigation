@@ -13,6 +13,7 @@ Tools could help you to understand the observed memory behaviors:
     - https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jcmd.html
 - GC logs: -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:gc.log
 - GCViewer (https://github.com/chewiebug/GCViewer)
+- -XX:+HeapDumpOnOutOfMemoryError
 - Memory Analyzer Tool (http://www.eclipse.org/mat/)
 - Java Mission Control (add -XX:+UnlockCommercialFeatures and -XX:+FlightRecorder JVM arguments)
 - https://github.com/jmaloney10/allocation-instrumenter
