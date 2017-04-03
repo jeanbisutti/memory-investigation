@@ -6,7 +6,11 @@ Use Launcher.java with -Xms100m and -Xmx100m JVM parameters. Execute generateTra
 
 
 Tools could help you to understand the observed memory behaviors:
-- JDK commands: jps, jstat, jmap, jcmd
+- JDK commands
+    - https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jps.html
+    - https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstat.html
+    - https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jmap.html
+    - https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jcmd.html
 - JVM aguments: -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:gc.log
 - GCViewer (https://github.com/chewiebug/GCViewer)
 - Memory Analyzer Tool (http://www.eclipse.org/mat/)
