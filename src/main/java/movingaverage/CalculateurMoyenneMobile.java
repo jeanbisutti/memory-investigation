@@ -30,7 +30,6 @@ public class CalculateurMoyenneMobile {
         Integer tradeAmount = trade.getMoney().getAmountInCents();
 
         int currentNumberOfTrades = tradeAmounts.size();
-
         if(isWindowsSizeReached(currentNumberOfTrades)) {
             tradeAmounts.poll();
         }
