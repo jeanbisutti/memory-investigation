@@ -27,7 +27,7 @@ public class CalculateurMoyenneMobile {
 
         int currentNumberOfTrades = trades.size();
 
-        if(isWindowsSizeReached(currentNumberOfTrades)) {
+        if(isWindowSizeReached(currentNumberOfTrades)) {
             trades.remove(0);
         }
 
@@ -57,7 +57,7 @@ public class CalculateurMoyenneMobile {
                 .computeIfAbsent(instrument, key -> new CopyOnWriteArrayList<>());
     }
 
-    private boolean isWindowsSizeReached(int currentNumberOfTrades) {
+    private boolean isWindowSizeReached(int currentNumberOfTrades) {
         return currentNumberOfTrades == inputWindowSize;
     }
 
