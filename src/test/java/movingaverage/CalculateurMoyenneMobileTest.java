@@ -26,7 +26,7 @@ public class CalculateurMoyenneMobileTest {
         calculateurMoyenneMobile.consume(anAppleTrade(12190));
 
         // When
-        int rollingAverage = calculateurMoyenneMobile.computeRollingAverageAmountFor(APPLE_INSTRUMENT);
+        int rollingAverage = calculateurMoyenneMobile.calculerMoyenneMobile(APPLE_INSTRUMENT);
 
         //Then
         assertThat(rollingAverage).isEqualTo(0);
@@ -46,7 +46,7 @@ public class CalculateurMoyenneMobileTest {
         calculateurMoyenneMobile.consume(anAppleTrade(12195));
 
         //When
-        int rollingAverage = calculateurMoyenneMobile.computeRollingAverageAmountFor(APPLE_INSTRUMENT);
+        int rollingAverage = calculateurMoyenneMobile.calculerMoyenneMobile(APPLE_INSTRUMENT);
 
         //Then
         assertThat(rollingAverage).isEqualTo(12190);
@@ -69,7 +69,7 @@ public class CalculateurMoyenneMobileTest {
         calculateurMoyenneMobile.consume(anAlphabetTrade(12195));
 
         //When
-        int rollingAverage = calculateurMoyenneMobile.computeRollingAverageAmountFor(ALPHABET_INSTRUMENT);
+        int rollingAverage = calculateurMoyenneMobile.calculerMoyenneMobile(ALPHABET_INSTRUMENT);
 
         //Then
         assertThat(rollingAverage).isEqualTo(12190);
@@ -94,7 +94,7 @@ public class CalculateurMoyenneMobileTest {
         calculateurMoyenneMobile.consume(aTeslaTrade(12195));
 
         //When
-        int rollingAverage = calculateurMoyenneMobile.computeRollingAverageAmountFor(TESLA_INSTRUMENT);
+        int rollingAverage = calculateurMoyenneMobile.calculerMoyenneMobile(TESLA_INSTRUMENT);
 
         //Then
         assertThat(rollingAverage).isEqualTo(12190);

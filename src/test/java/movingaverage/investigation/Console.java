@@ -40,6 +40,6 @@ public class Console implements ConsoleMBean {
 
     @Override
     public int computeRollingAverageAmount(String instrument) {
-        return calculateurMoyenneMobile.computeRollingAverageAmountFor(instrument);
+        return calculateurMoyenneMobile.calculerMoyenneMobile(instrument);
     }
 }

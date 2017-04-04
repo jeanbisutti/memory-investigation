@@ -7,7 +7,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CalculateurMoyenneMobile {
 
-    private static final Map<String, CopyOnWriteArrayList<Trade>> TRADES_BY_INSTRUMENT = new ConcurrentHashMap<>();
+    private static final Map<String, CopyOnWriteArrayList<Trade>> TRADES_BY_INSTRUMENT
+                                                           = new ConcurrentHashMap<>();
 
     private final int inputWindowSize;
 
@@ -29,7 +30,7 @@ public class CalculateurMoyenneMobile {
 
     }
 
-    public int computeRollingAverageAmountFor(String instrument) {
+    public int calculerMoyenneMobile(String instrument) {
 
         if(!receivedTradeFor(instrument)) {
             return 0;
