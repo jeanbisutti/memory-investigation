@@ -1,7 +1,5 @@
 package movingaverage;
 
-import com.sun.corba.se.spi.transport.TransportDefault;
-
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
