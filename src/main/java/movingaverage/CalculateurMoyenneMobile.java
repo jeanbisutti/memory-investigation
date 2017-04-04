@@ -7,13 +7,13 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class MovingAverageCalculator {
+public class CalculateurMoyenneMobile {
 
     private static final Map<String, BlockingQueue<Integer>> TRADES_BY_INSTRUMENT = new ConcurrentHashMap<>();
 
     private final int inputWindowSize;
 
-    public MovingAverageCalculator(int windowSize) {
+    public CalculateurMoyenneMobile(int windowSize) {
         this.inputWindowSize = windowSize;
     }
 
