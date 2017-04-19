@@ -7,10 +7,10 @@ Use Launcher.java with -Xms100m and -Xmx100m JVM parameters. Execute generateTra
 
 Tools could help you to understand the observed memory behaviors:
 - JDK commands
-    - https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jps.html
-    - https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstat.html
-    - https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jmap.html
-    - https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/tooldescr006.html
+    - jps https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jps.html
+    - jstat https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstat.html
+    - jmap https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jmap.html
+    - jcmd https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/tooldescr006.html
 - GC logs: -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:gc.log
 - GCViewer (https://github.com/chewiebug/GCViewer)
 - -XX:+HeapDumpOnOutOfMemoryError
